@@ -1,0 +1,36 @@
+
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  # For details on connection pooling, see Rails configuration guide
+  # http://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: web_development
+  host: db #da duoc khai bao trong docker-composr.ylm phan links
+  username: hien_hai
+  password: 123
+
+  
+test:
+  <<: *default
+  database: web_test
+
+
+production:
+  <<: *default
+  database: web_production
+  username: web
+  password: <%= ENV['WEB_DATABASE_PASSWORD'] %>
+
+
+  # pg_ctl -D /var/lib/postgresql/data -l logfile start
+
+#khoi dong db
+# pg_ctl -D /var/lib/postgresql/data -l logfile start
+
+# tao bang va chay migrate
+# rails generate model Article title:string text:text
+# rails db:migrate

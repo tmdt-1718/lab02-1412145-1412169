@@ -1,0 +1,33 @@
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    Login
+  </li>
+</ol>
+
+
+<div class="container">
+      <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6 ">
+        <div class="page-header">
+          	<h1 class="text-center"><small>Log in</small></h1>
+        </div>
+          <%= form_for(:session, url: login_path) do |f| %>
+    
+    		<p>
+		    	<%= f.label :username %>
+		    	<%= f.text_field :username, class: 'form-control' %>
+			</p>
+		    <p>
+		    	<%= f.label :password %>
+		    	<%= f.password_field :password, class: 'form-control' %>
+			</p>
+		    <p>
+		    	<%= f.submit "Log in", class: "btn btn-primary" %>
+		    	Don't have account? <%= link_to "Create now!", signup_path %>
+			</p>
+		<% end %>
+        </div>
+        <div class="col-md-3"></div>
+      </div>
+</div>

@@ -1,0 +1,88 @@
+<!-- Breadcrumbs-->
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <a href="<%= root_path %>">Home</a>
+  </li>
+  <li class="breadcrumb-item active">About</li>
+</ol>
+
+<div class="container">
+  <div class="row content about-content-center">
+    <h1>H2O Team - 1412145 - 1412169</h1>
+  </div>
+  <hr></hr>
+  <div class="row">
+    <div class="col-sm-6 col-md-6 col-lg-6">
+      <div class="about-card text-white bg-success o-hidden h-100">
+        <div class="card-header">
+          <div class="about-avatar">
+              <img src="https://scontent.fsgn2-1.fna.fbcdn.net/v/t1.0-9/17352149_1668821030080056_7041072172061674479_n.jpg?oh=3a6358996963dd8de8783ee2ace476cb&oe=5A80E56B" alt="" />
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-body-icon">
+            <i class="fa fa-fw fa-bolt">
+            </i>
+          </div>
+          <div class="content">
+            <p>Web Developer <br>
+              1412145 <br>
+              Nguyen Duc Hai</p>
+          </div>
+        </div>
+        <div class="card-footer">
+          <!-- <p><button type="button" class="btn btn-default">Contact</button></p> -->
+        </div>  
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-md-6 col-lg-6">
+      <div class="about-card text-white bg-primary o-hidden h-100">
+        <div class="card-header">
+          <div class="about-avatar">
+              <img src="https://scontent.fsgn2-1.fna.fbcdn.net/v/t1.0-9/14606479_1277075772396398_731722864902809829_n.jpg?oh=ae81d58a4571261f53e83b99cc853c96&oe=5A3D62F1" alt="" />
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-body-icon">
+            <i class="fa fa-fw fa-support">
+            </i>
+          </div>
+          <div class="content">
+            <p>Web Developer <br>
+              1412169 <br>
+              Ho Thao Hien </p>
+          </div>
+        </div>
+        <div class="card-footer">
+          <!-- <p><button type="button" class="btn btn-default">Contact</button></p> -->
+        </div>  
+      </div>
+    </div>
+  </div>
+  <hr></hr>
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-12 content">
+    <p><h3>Find us</h3></p>
+    </div>
+    <div id="map" style="width:80%;height:400px;background:yellow" class="col-sm-12 col-md-12 col-lg-12"></div>
+    <br><br><br>
+    <hr></hr>
+    <script>
+    function myMap() {
+    var mapOptions = {
+        center: new google.maps.LatLng(10.7627599, 106.6834825),
+        zoom: 15,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+    var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+    var marker = new google.maps.Marker({
+      position: new google.maps.LatLng(10.7627599, 106.6834825),
+      map: map
+    });
+    }
+    </script>
+    
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB-FfXoogdTha35VUdYqdvro3DY1tY9Q8U&callback=myMap"></script>
+  </div>
+</div>

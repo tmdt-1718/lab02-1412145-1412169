@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>H2O - Soical Network</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <!-- Custom fonts for this template-->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- Page level plugin CSS-->
+    <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+  </head>
+
+  <body class="sticky-footer bg-dark" id="page-top">
+  <!-- Navigation-->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="mainNav">
+   
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+      aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+
+         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Home">
+          <a class="nav-link" href="<%= root_path %>">
+            <i class="fa fa-fw fa-home"></i>
+            <span class="nav-link-text"><b style="font-size: 30px">H2O</b></span>
+           
+          </a>
+        </li>
+
+        
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Albums">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
+            <i class="fa fa-fw fa-file-image-o"></i>
+            <span class="nav-link-text">All message</span>
+          </a>
+          <ul class="sidenav-second-level collapse" id="collapseComponents">
+            <li>
+              
+              <a class="nav-link" href="#">
+                <i class="fa fa-fw fa-eye"></i>
+                <span class="nav-link-text">View</span>
+              </a>
+            </li>
+            <li>
+              <a class="nav-link" href="#">
+                <i class="fa fa-fw fa-plus"></i>
+                <span class="nav-link-text">Sent new message</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Home">
+          <a class="nav-link" href="<%= root_path %>">
+            <i class="fa fa-fw fa-home"></i>
+           <span class="nav-link-text">Received message</span>
+          </a>
+        </li>
+
+         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Home">
+          <a class="nav-link" href="<%= root_path %>">
+            <i class="fa fa-fw fa-home"></i>
+           <span class="nav-link-text">Seen message</span>
+          </a>
+        </li>
+
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Blog">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
+            <i class="fa fa-fw fa-newspaper-o"></i>
+            <span class="nav-link-text">Friends</span>
+          </a>
+          <ul class="sidenav-second-level collapse" id="collapseExamplePages">
+            <li>
+              <a class="nav-link" href="#">
+                <i class="fa fa-fw fa-eye"></i>
+                <span class="nav-link-text">View</span>
+              </a>
+            </li>
+            <li>
+              <a class="nav-link" href="#">
+                <i class="fa fa-fw fa-plus"></i>
+                <span class="nav-link-text">Add new friend</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="About">
+          <a class="nav-link" href="<%= about_path %>">
+            <i class="fa fa-fw fa-link"></i>
+            <span class="nav-link-text">About</span>
+          </a>
+        </li>
+     
+      </ul>
+    </div>
+  </nav>
+    <div class="content-wrapper">
+      <div class="container-fluid">
+        <!-- Breadcrumbs-->
+       <!--  <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="<%= home_index_path %>">Home</a>
+          </li>
+          <li class="breadcrumb-item active">My Home</li>
+        </ol> -->
+        <!-- Page content-->
+        <%= yield %>
+      </div>
+    </div>
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fa fa-angle-up"></i>
+    </a>
+  </body>
+</html>

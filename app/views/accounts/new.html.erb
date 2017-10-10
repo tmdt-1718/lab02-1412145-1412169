@@ -1,0 +1,45 @@
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    Sign up
+  </li>
+</ol>
+
+<div class="container">
+      <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6 ">
+        <div class="page-header">
+            <h1 class="text-center"><small>Sign up</small></h1>
+        </div>
+          <%= form_for(@account, url: signup_path) do |f| %>
+            <%= render 'shared/error_messages' %>    
+
+            <p>
+            <%= f.label :fullname %>
+            <%= f.text_field :fullname, class: 'form-control' %>
+            </p>
+
+            <p>
+            <%= f.label :username %>
+            <%= f.text_field :username, class: 'form-control' %>
+            </p>
+
+            <p>
+            <%= f.label :password %>
+            <%= f.password_field :password, class: 'form-control' %>
+            </p>
+
+            <p>
+            <%= f.label :password_confirmation, "Confirm password" %>
+            <%= f.password_field :password_confirmation, class: 'form-control' %>
+            </p>
+
+            <p>
+            <%= f.submit "Create my account", class: "btn btn-primary" %>
+            </p>
+        <% end %>
+        </div>
+        <div class="col-md-3"></div>
+      </div>
+</div>

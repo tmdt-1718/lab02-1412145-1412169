@@ -1,0 +1,26 @@
+version: '2'
+services:
+  web:
+   # Cham --> tim den Dockerfile
+    build: .  
+
+    ports: 
+      - "3000:3000"
+
+    #map thu muc trong may ao va thu muc ben ngoai, lay thu muc hien hanh ngoai may that/web
+    volumes:            
+      - .:/web
+    container_name: web
+    #lenh mac dinh de start may ao
+    command: sh /web/startup.sh
+    # bundle exec "install && rails serve -b 0.0.0.0" #overide cmd ben Dockerfile, lenh duoc chay sau khi da tao ra may ao roi
+    env_file: .env
+    
+    links:
+      - db
+  
+  db:
+    image: postgres 
+    container_name: app_db
+    env_file: .env
+     
