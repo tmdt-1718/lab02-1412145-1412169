@@ -19,23 +19,40 @@
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="mainNav">
    
+    <a class="navbar-brand" href="<%= root_path %>"><h4><b>H2O</b></h4></a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive"
       aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-
     <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <% if logged_in? %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle mr-lg-2" data-toggle="dropdown" aria-haspopup="true">
+              Hi, <%= current_account.fullname %>! <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              <li><%= link_to "Profile", current_account, class:"dropdown-item" %></li>
+              <div class="dropdown-divider"></div>
+              <li>
+                <%= link_to "Log out", logout_path, method: :delete, class:"dropdown-item" %>
+              </li>
+            </ul>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <a class="nav-link" href="<%= signup_path %>">
+              <i class="fa fa-fw fa-sign-out"></i>Signup
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<%= login_path %>">
+              <i class="fa fa-fw fa-key"></i>Login
+            </a>
+          </li>
+        <% end %>
+      </ul>
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-
-         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Home">
-          <a class="nav-link" href="<%= root_path %>">
-            <i class="fa fa-fw fa-home"></i>
-            <span class="nav-link-text"><b style="font-size: 30px">H2O</b></span>
-           
-          </a>
-        </li>
-
-        
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Albums">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
             <i class="fa fa-fw fa-file-image-o"></i>
@@ -79,13 +96,13 @@
           </a>
           <ul class="sidenav-second-level collapse" id="collapseExamplePages">
             <li>
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="<%= friends_path %>">
                 <i class="fa fa-fw fa-eye"></i>
                 <span class="nav-link-text">View</span>
               </a>
             </li>
             <li>
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="<%= new_friend_path %>">
                 <i class="fa fa-fw fa-plus"></i>
                 <span class="nav-link-text">Add new friend</span>
               </a>

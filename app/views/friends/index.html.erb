@@ -1,0 +1,44 @@
+<!-- Breadcrumbs-->
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <a href="<%= root_path %>">Home</a>
+  </li>
+  <li class="breadcrumb-item active">Friends</li>
+</ol>
+
+<div class="mb-0 mt-4">
+    <div class="row">
+        <div class="col-md-4 col-sm-4 col-lg-4">
+            <i class="fa fa-newspaper-o"></i> Friends
+            <div class="clearfix"></div>
+            <%= link_to new_friend_path do %>
+            <button type="button" class="btn btn-primary btn-sm"">Add new friend</button>
+            <% end %>
+        </div>
+       
+    </div>
+    
+</div>
+<hr class="mt-2">
+
+<% if !@friendlist.nil? %>
+    <% @friendlist.each do |friend| %>
+        <% if friend.id != current_account.id %>
+            <div class="card-rows">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="media mt-3">
+                            <a class="d-flex pr-3" href="#">
+                                <img src="<%= friend.avatar %>" alt="" width="45px" height="45px">
+                            </a>
+                            <div class="media-body">
+                                <h6 class="card-title mb-1"><a href="#"><%= friend.fullname %></a></h6>
+                                <div class="small text-muted">Last message at 5 minutes ago</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% end %>
+    <% end %>
+<% end %>

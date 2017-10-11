@@ -1,0 +1,50 @@
+<!-- Breadcrumbs-->
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">
+    <a href="<%= root_path %>">Home</a>
+  </li>
+  <li class="breadcrumb-item">
+    <a href="<%= friends_path %>">Friends</a>
+  </li>
+  <li class="breadcrumb-item active">Add Friend</li>
+</ol>
+
+<div class="mb-0 mt-4">
+    <div class="row">
+        <div class="col-md-4 col-sm-4 col-lg-4">
+            <i class="fa fa-newspaper-o"></i> Add Friend
+            <div class="clearfix"></div>
+        </div>
+       
+    </div>
+    
+</div>
+<hr class="mt-2">
+
+<% if !@account.nil? %>
+    <% @account.each do |account| %>
+        <% if account.id != current_account.id %>
+            <div class="card-rows">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="media mt-3">
+                            <a class="d-flex pr-3" href="#">
+                                <img src="<%= account.avatar %>" alt="" width="45px" height="45px">
+                            </a>
+                            <div class="media-body">
+                                <h6 class="card-title mb-1"><a href="#"><%= account.fullname %></a></h6>
+                                <div class="small text-muted">Some description</div>
+                            </div>
+                            <a class="d-flex pr-3" href="#">
+                                <a class="btn btn-md btn-primary" href="#">
+                                    <i class="fa fa-fw fa-plus"></i>
+                                    Add friend
+                                </a>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% end %>
+    <% end %>
+<% end %>

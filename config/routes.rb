@@ -1,11 +1,11 @@
 
 Rails.application.routes.draw do
   
-  get 'posts/:id/viewcount', to: 'posts#getviewcount'
+  # get 'posts/:id/viewcount', to: 'posts#getviewcount'
 
   get '/about', to: 'about#show'
 
-  get '/albums/:album_id/photo/:id', to: 'photos#show'
+  # get '/albums/:album_id/photo/:id', to: 'photos#show'
 
   get '/signup', to: 'accounts#new'
 
@@ -22,6 +22,6 @@ Rails.application.routes.draw do
 
   resources :home
   resources :accounts
-  resources :accounts
+  resources :friends
 
 end
