@@ -2,18 +2,31 @@ class FriendsController < ApplicationController
     before_action :logged_in_account, only: [:index]
 
     def index
-        friendships = Conversation.find_by(sender_id: current_account.id)
+        # friendships = Conversation.find_by(sender_id: current_account.id)
+        # if !friendships.nil?
+        #     friendships.each do |friendship|
+        #         @friendlist += Account.find_by(id: friendship.recipient_id)
+        #     end
+        # else
+        #     @friendlist = nil
+        # end
+        # Conversation.find_each(sender_id: current_account.id) do friendship
+        #     @friendlist += Account.find_by(id: friendship.recipient_id)
+        # end
+        @friendlist ||= []
+        friendships = Conversation.where(sender_id: current_account.id)
         if !friendships.nil?
             friendships.each do |friendship|
-                @friendlist += Account.find_by(id: friendship.recipient_id)
+                @friendlist.push(Account.find_by(id: friendship.recipient_id))
             end
-        else
-            @friendlist = nil
         end
+
+        # @friendlist = Conversation.where(sender_id: current_account.id)
     end
 
     def new
         @account = Account.all
+
     end
 
     def create

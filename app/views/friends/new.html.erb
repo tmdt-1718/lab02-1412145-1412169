@@ -35,12 +35,12 @@
                                 <h6 class="card-title mb-1"><a href="#"><%= account.fullname %></a></h6>
                                 <div class="small text-muted">Some description</div>
                             </div>
-                            <a class="d-flex pr-3" href="#">
-                                <a class="btn btn-md btn-primary" href="#">
-                                    <i class="fa fa-fw fa-plus"></i>
-                                    Add friend
-                                </a>
-                            </a>
+                            <%= form_tag(controller: "friends", action: "create") do %>
+                                <div class="class="d-flex pr-3"">
+                                    <%= hidden_field_tag("requestedid", account.id) %>
+                                    <%= submit_tag("Add friend", :class => 'btn btn-primary') %>
+                                </div>
+                            <% end %>
                         </div>
                     </div>
                 </div>
