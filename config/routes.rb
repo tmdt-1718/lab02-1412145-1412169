@@ -1,7 +1,7 @@
 
 Rails.application.routes.draw do
   
-  # get 'posts/:id/viewcount', to: 'posts#getviewcount'
+  get 'friends/accept/:id', to: 'friends#acceptrequest'
 
   get '/about', to: 'about#show'
 

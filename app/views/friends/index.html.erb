@@ -21,22 +21,72 @@
 </div>
 <hr class="mt-2">
 
-<% if !@friendlist.nil? %>
-    <% @friendlist.each do |friend| %>
-            <div class="card-rows">
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <div class="media mt-3">
-                            <a class="d-flex pr-3" href="#">
-                                <img src="<%= friend.avatar %>" alt="" width="45px" height="45px">
-                            </a>
-                            <div class="media-body">
-                                <h6 class="card-title mb-1"><a href="#"><%= friend.fullname %></a></h6>
-                                <div class="small text-muted">Last message at 5 minutes ago</div>
+
+
+    <div class="list-content">
+        <ul class="list-group">
+            <li href="#" class="list-group-item title">
+                Friend list
+            </li>
+            <% if !@friendlist.nil? %>
+                <% @friendlist.each do |friend| %>
+                    <li href="#" class="list-group-item text-left">
+                        <img class="img-thumbnail" src="<%= friend.avatar %>">
+                        <label class="name">
+                            <%= friend.fullname %><br>
+                        </label>
+                        <label class="pull-right">
+                            <a  class="btn btn-success btn-xs glyphicon glyphicon-ok" href="#" title="View"></a>
+                            <a  class="btn btn-danger  btn-xs glyphicon glyphicon-trash" href="#" title="Delete"></a>
+                            <a  class="btn btn-info  btn-xs glyphicon glyphicon glyphicon-comment" href="#" title="Send message"></a>
+                        </label>
+                        <div class="break"></div>
+                    </li>
+                <% end %>
+            <% end %>
+        </ul>
+
+        <ul class="list-group">
+            <li href="#" class="list-group-item title">
+                Friend request
+            </li>
+            <% if !@request_list.nil? %>
+                <% @request_list.each do |friend| %>
+                    <li href="#" class="list-group-item text-left">
+                        <img class="img-thumbnail" src="<%= friend.avatar %>">
+                        <label class="name">
+                            <%= friend.fullname %><br>
+                        </label>
+                        <label class="pull-right">
+                            <div class="class="d-flex pr-3""><br>
+                                <a href="/friends/accept/<%= friend.id %>" class="btn btn-md btn-primary">Accept</a>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-    <% end %>
-<% end %>
+                        </label>
+                        <div class="break"></div>
+                    </li>
+                <% end %>
+            <% end %>
+        </ul>
+
+        <ul class="list-group">
+            <li href="#" class="list-group-item title">
+                Waiting for accept your friend request...
+            </li>
+            <% if !@wait_for_accept_list.nil? %>
+                <% @wait_for_accept_list.each do |friend| %>
+                    <li href="#" class="list-group-item text-left">
+                        <img class="img-thumbnail" src="<%= friend.avatar %>">
+                        <label class="name">
+                            <%= friend.fullname %><br>
+                        </label>
+                        <label class="pull-right">
+                            <a  class="btn btn-success btn-xs glyphicon glyphicon-ok" href="#" title="View"></a>
+                            <a  class="btn btn-danger  btn-xs glyphicon glyphicon-trash" href="#" title="Delete"></a>
+                            <a  class="btn btn-info  btn-xs glyphicon glyphicon glyphicon-comment" href="#" title="Send message"></a>
+                        </label>
+                        <div class="break"></div>
+                    </li>
+                <% end %>
+            <% end %>
+        </ul>
+    </div>
