@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   
   get 'friends/accept/:id', to: 'friends#acceptrequest'
 
+  get 'friends/deleterequest/:id', to: 'friends#deleterequest'
+
   get '/about', to: 'about#show'
 
   # get '/albums/:album_id/photo/:id', to: 'photos#show'

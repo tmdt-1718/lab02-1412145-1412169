@@ -58,9 +58,14 @@
                             <%= friend.fullname %><br>
                         </label>
                         <label class="pull-right">
-                            <div class="class="d-flex pr-3""><br>
+                            <!-- <div class="d-flex pr-3">
                                 <a href="/friends/accept/<%= friend.id %>" class="btn btn-md btn-primary">Accept</a>
                             </div>
+                            <div class="d-flex pr-3">
+                                <a href="#" class="btn btn-md btn-primary">Delete request</a>
+                            </div> -->
+                            <a href="/friends/accept/<%= friend.id %>" class="btn btn-xs btn-primary fa fa-check" title="Confirm"></a>
+                            <a href="/friends/deleterequest/<%= friend.id %>" class="btn btn-xs btn-danger fa fa-remove" title="Delete request"></a>
                         </label>
                         <div class="break"></div>
                     </li>

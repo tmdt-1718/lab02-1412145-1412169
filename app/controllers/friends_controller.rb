@@ -76,6 +76,12 @@ class FriendsController < ApplicationController
         redirect_to friends_path
     end
 
+    def deleterequest
+        @friendship = Friend.find_by(account_id: params[:id], friend_id: current_account.id)
+        @friendship.destroy
+        redirect_to friends_path
+    end
+
     private
         # Confirms a logged-in account.
         def logged_in_account
