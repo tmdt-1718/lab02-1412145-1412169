@@ -27,5 +27,6 @@ Rails.application.routes.draw do
   resources :home
   resources :accounts
   resources :friends
+  resources :messages
 
 end
