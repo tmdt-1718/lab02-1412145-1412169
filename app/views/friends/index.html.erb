@@ -35,10 +35,9 @@
                         <label class="name">
                             <%= friend.fullname %><br>
                         </label>
-                        <label class="pull-right">
-                            <a  class="btn btn-success btn-xs glyphicon glyphicon-ok" href="#" title="View"></a>
-                            <a  class="btn btn-danger  btn-xs glyphicon glyphicon-trash" href="#" title="Delete"></a>
-                            <a  class="btn btn-info  btn-xs glyphicon glyphicon glyphicon-comment" href="#" title="Send message"></a>
+                        <label class="pull-right"><br>
+                            <a href="/friends/deleterequest/<%= friend.id %>" class="btn btn-xs btn-danger fa fa-trash" title="Remove friend"></a>
+                            <a href="/friends/block/<%= friend.id %>" class="btn btn-xs btn-dark fa fa-times-circle" title="Block"></a>
                         </label>
                         <div class="break"></div>
                     </li>
@@ -57,15 +56,10 @@
                         <label class="name">
                             <%= friend.fullname %><br>
                         </label>
-                        <label class="pull-right">
-                            <!-- <div class="d-flex pr-3">
-                                <a href="/friends/accept/<%= friend.id %>" class="btn btn-md btn-primary">Accept</a>
-                            </div>
-                            <div class="d-flex pr-3">
-                                <a href="#" class="btn btn-md btn-primary">Delete request</a>
-                            </div> -->
+                        <label class="pull-right"><br>
                             <a href="/friends/accept/<%= friend.id %>" class="btn btn-xs btn-primary fa fa-check" title="Confirm"></a>
-                            <a href="/friends/deleterequest/<%= friend.id %>" class="btn btn-xs btn-danger fa fa-remove" title="Delete request"></a>
+                            <a href="/friends/deleterequest/<%= friend.id %>" class="btn btn-xs btn-danger fa fa-trash" title="Delete request"></a>
+                            <a href="/friends/block/<%= friend.id %>" class="btn btn-xs btn-dark fa fa-times-circle" title="Block"></a>
                         </label>
                         <div class="break"></div>
                     </li>
@@ -84,10 +78,29 @@
                         <label class="name">
                             <%= friend.fullname %><br>
                         </label>
-                        <label class="pull-right">
-                            <a  class="btn btn-success btn-xs glyphicon glyphicon-ok" href="#" title="View"></a>
-                            <a  class="btn btn-danger  btn-xs glyphicon glyphicon-trash" href="#" title="Delete"></a>
-                            <a  class="btn btn-info  btn-xs glyphicon glyphicon glyphicon-comment" href="#" title="Send message"></a>
+                        <label class="pull-right"><br>
+                            <a href="/friends/deleterequest/<%= friend.id %>" class="btn btn-xs btn-danger fa fa-trash" title="Delete request"></a>
+                            <a href="/friends/block/<%= friend.id %>" class="btn btn-xs btn-dark fa fa-times-circle" title="Block"></a>
+                        </label>
+                        <div class="break"></div>
+                    </li>
+                <% end %>
+            <% end %>
+        </ul>
+
+        <ul class="list-group">
+            <li href="#" class="list-group-item title">
+                Blocked list
+            </li>
+            <% if !@blocked_list.nil? %>
+                <% @blocked_list.each do |friend| %>
+                    <li href="#" class="list-group-item text-left">
+                        <img class="img-thumbnail" src="<%= friend.avatar %>">
+                        <label class="name">
+                            <%= friend.fullname %><br>
+                        </label>
+                        <label class="pull-right"><br>
+                            
                         </label>
                         <div class="break"></div>
                     </li>

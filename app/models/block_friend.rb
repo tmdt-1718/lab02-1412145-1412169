@@ -1,0 +1,2 @@
+class BlockFriend < ApplicationRecord
+end
