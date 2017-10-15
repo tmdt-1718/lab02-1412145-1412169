@@ -1,11 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  title: MyString
   body: MyText
-  conversation: 1
-  account: 1
+  sender_id: 1
+  conversation_id: 1
+  unread: false
 
 two:
+  title: MyString
   body: MyText
-  conversation: 1
-  account: 1
+  sender_id: 1
+  conversation_id: 1
+  unread: false
