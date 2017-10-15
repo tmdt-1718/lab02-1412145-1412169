@@ -1,0 +1,4 @@
+<% @sent_message.each do |sent_message| %>
+	<%= sent_message[:recipient].fullname %><br>
+	<%= sent_message[:message_content].body %><br>
+<% end %>

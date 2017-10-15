@@ -28,5 +28,6 @@ Rails.application.routes.draw do
   resources :accounts
   resources :friends
   resources :messages
+  resources :conversations
 
 end
