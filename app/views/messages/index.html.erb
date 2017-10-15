@@ -68,7 +68,7 @@
                         </div>
 
                         <ul class="unstyled inbox-pagination">
-                            <li><span>1-50 of 234</span></li>
+                            <li><span><%= @sum_sent_message %></span></li>
                             <li>
                                 <a class="np-btn" href="#"><i class="fa fa-angle-left  pagination-left"></i></a>
                             </li>
@@ -93,7 +93,6 @@
 	                            <% end %>
                             <% end %>
                         </tbody>
-                        <%= will_paginate @products %>
                     </table>
                 </div>
             </aside>

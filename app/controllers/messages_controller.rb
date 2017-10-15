@@ -42,7 +42,9 @@ class MessagesController < ApplicationController
 	end
 
 	def index
+		
 		@message = Message.where("sender_id = ?", current_account.id)
+		@sum_sent_message = @message.length
 		@sent_message ||= []
 		if !@message.nil?
 			@message.each do |message|
@@ -55,11 +57,8 @@ class MessagesController < ApplicationController
 				@sent_message.push({"message_content": message, "recipient": @recipient})
 			end
 		end
-		@sent_message.paginate(page: params[:page], per_page: 15)
-	end
 
-	def count_sent_message
-		@sum_message = Message.where("sender_id = ?", current_account.id).count
-		return @sum_message
+
+
 	end
 end
