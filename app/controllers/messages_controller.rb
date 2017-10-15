@@ -1,7 +1,5 @@
 class MessagesController < ApplicationController
 	def new
-		# @message = Message.new
-
 		@friendlist ||= []
 		friendships = Friend.where("account_id = ? OR friend_id = ?", current_account.id, current_account.id)
         if !friendships.nil?
@@ -16,8 +14,6 @@ class MessagesController < ApplicationController
                 end
             end
         end
-
-
 	end
 
 	def create
@@ -59,6 +55,11 @@ class MessagesController < ApplicationController
 				@sent_message.push({"message_content": message, "recipient": @recipient})
 			end
 		end
+		@sent_message.paginate(page: params[:page], per_page: 15)
 	end
->>>>>>> f81ae201fbc35177fe4e4ea69dd84356107522a4
+
+	def count_sent_message
+		@sum_message = Message.where("sender_id = ?", current_account.id).count
+		return @sum_message
+	end
 end

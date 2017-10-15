@@ -9,8 +9,6 @@ Rails.application.routes.draw do
 
   get '/about', to: 'about#show'
 
-  # get '/albums/:album_id/photo/:id', to: 'photos#show'
-
   get '/signup', to: 'accounts#new'
 
   post'/signup', to: 'accounts#create'
