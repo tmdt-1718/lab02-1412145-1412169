@@ -101,18 +101,19 @@
                     Recieve_message
                     <table class="table table-inbox table-hover">
                         <tbody>
-
                         	<% if @recieve_message != nil %>
 	                        	<% @recieve_message.each do |message| %>
-	                            <tr class="">
-	                                <td class="inbox-small-cells">
-	                                    <input type="checkbox" class="mail-checkbox">
-	                                </td>
-	                                <td class="inbox-small-cells"><i class="fa fa-star"></i></td>
-	                               	<td class="view-message  dont-show"><%= message[:sender].fullname %></td>
-	                                <td class="view-message"><b><%= message[:message_content].title %></b> <%= message[:message_content].body %></td>
-	                                <td class="view-message text-right"> <%= message[:message_content].created_at %></td>
-	                            </tr>
+	                            
+                                    <tr class="unread">
+    	                                <td class="inbox-small-cells">
+    	                                    <input type="checkbox" class="mail-checkbox">
+    	                                </td>
+    	                                <td class="inbox-small-cells"><i class="fa fa-star"></i></td>
+    	                               	<td class="view-message dont-show"><a href="/messages/<%= message[:message_content].id? %>"><%= message[:sender].fullname %></a></td>
+    	                                <td class="view-message"><a href="/messages/<%= message[:message_content].id %>"><b><%= message[:message_content].title %></b><%= message[:message_content].body %></a></td>
+    	                                <td class="view-message text-right"> <a href="/messages/<%= message[:message_content].id %>"><%= message[:message_content].created_at %></a></td>
+    	                            </tr> 
+                                
 	                            <% end %>
                             <% end %>
                         </tbody>

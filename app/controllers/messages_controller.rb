@@ -1,4 +1,5 @@
 class MessagesController < ApplicationController
+
 	def new
 		@friendlist ||= []
 		friendships = Friend.where("account_id = ? OR friend_id = ?", current_account.id, current_account.id)
@@ -16,7 +17,7 @@ class MessagesController < ApplicationController
         end
 	end
 
-	def create
+	def creates
 		# render plain: params[:message][:friend_id]
 		content_message = params[:message][:content]
 		friend_id = params[:message][:friend_id]
@@ -74,6 +75,17 @@ class MessagesController < ApplicationController
 				end			
 			end
 		end	
+	end
+
+
+	def show
+		@message_detail = Message.find(params[:id])
+		conversation = Conversation.find_by(id: @message_detail.conversation_id)
+		if @message_detail.sender_id == conversation.account1_id
+			@sender = Account.find_by(id: conversation.account2_id)
+		else
+			@sender = Account.find_by(id:conversation.account1_id)
+		end
 	end
 
 
