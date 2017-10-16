@@ -42,7 +42,7 @@ class MessagesController < ApplicationController
 	end
 
 	def index
-		
+		#recieve_message
 		@message = Message.where("sender_id = ?", current_account.id)
 		@sum_sent_message = @message.length
 		@sent_message ||= []
@@ -58,7 +58,23 @@ class MessagesController < ApplicationController
 			end
 		end
 
-
-
+		#recieve_message
+		@conversations = Conversation.where("account1_id = ? OR account2_id = ?", current_account.id, current_account.id)
+		@recieve_message ||= []
+		if !@conversations.nil?
+			@conversations.each do |conversation|
+				@messages = Message.where(conversation_id: conversation.id).where.not("sender_id = ?", current_account.id)
+				@messages.each do |mess|
+					if mess.sender_id == conversation.account1_id
+						@sender = Account.find_by(id: conversation.account2_id)
+					else
+						@sender = Account.find_by(id:conversation.account1_id)
+					end
+					@recieve_message.push({"message_content": mess, "sender": @sender})
+				end			
+			end
+		end	
 	end
+
+
 end
