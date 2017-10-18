@@ -28,8 +28,27 @@
 				<tr>
 					<td>
 						<p class="callout">
-							From: <strong><%= @sender.fullname %></strong> (<a href="emailto:<%= @sender.username %>"><%= @sender.username %></a>)
-							<a href=""><button class="pull-right btn btn-primary btn-sm">Response</button></a>
+							<% if @sender.id == current_account.id %>
+								From: <strong>Me</strong>
+							<% else %>
+								From: <strong><%= @sender.fullname %></strong> (<a href="emailto:<%= @sender.username %>">
+								<%= @sender.username %>
+									
+								</a>)
+								<a href=""><button class="pull-right btn btn-primary btn-sm">Reply</button></a>
+							<% end %>
+							
+							
+							<br><br>
+
+							<% if @recipient.id == current_account.id %>
+								To:&nbsp;&nbsp;&nbsp;&nbsp; <strong>Me</strong> 
+							<% else %>
+								To:&nbsp;&nbsp;&nbsp;&nbsp; <strong><%= @recipient.fullname %></strong> (<a href="emailto:<%= @recipient.username %>">
+								<%= @recipient.username %>
+								</a>)
+							<% end %>
+							
 						</p>				
 						<h3><%= @message_detail.title %></h3>
 						<p style="background-color: #ffffff;" class="callout"><%= @message_detail.body %></p>		

@@ -17,7 +17,7 @@ class MessagesController < ApplicationController
         end
 	end
 
-	def creates
+	def create
 		# render plain: params[:message][:friend_id]
 		content_message = params[:message][:content]
 		friend_id = params[:message][:friend_id]
@@ -43,38 +43,44 @@ class MessagesController < ApplicationController
 	end
 
 	def index
-		#recieve_message
-		@message = Message.where("sender_id = ?", current_account.id)
-		@sum_sent_message = @message.length
 		@sent_message ||= []
-		if !@message.nil?
-			@message.each do |message|
-				conversation = Conversation.find_by(id: message.conversation_id)
-				if conversation.account1_id == current_account.id
-					@recipient = Account.find_by(id: conversation.account2_id)
-				else
-					@recipient = Account.find_by(id: conversation.account1_id)
+		@recieve_message ||= []
+
+		param_view = params[:view]
+
+		#sent_message
+		if param_view != "recieve"
+			@message = Message.where("sender_id = ?", current_account.id)
+			if !@message.nil?
+				@message.each do |message|
+					conversation = Conversation.find_by(id: message.conversation_id)
+					if conversation.account1_id == current_account.id
+						@recipient = Account.find_by(id: conversation.account2_id)
+					else
+						@recipient = Account.find_by(id: conversation.account1_id)
+					end
+					@sent_message.push({"message_content": message, "recipient": @recipient})
 				end
-				@sent_message.push({"message_content": message, "recipient": @recipient})
 			end
 		end
 
 		#recieve_message
-		@conversations = Conversation.where("account1_id = ? OR account2_id = ?", current_account.id, current_account.id)
-		@recieve_message ||= []
-		if !@conversations.nil?
-			@conversations.each do |conversation|
-				@messages = Message.where(conversation_id: conversation.id).where.not("sender_id = ?", current_account.id)
-				@messages.each do |mess|
-					if mess.sender_id == conversation.account1_id
-						@sender = Account.find_by(id: conversation.account2_id)
-					else
-						@sender = Account.find_by(id:conversation.account1_id)
-					end
-					@recieve_message.push({"message_content": mess, "sender": @sender})
-				end			
+		if param_view != "sent"
+			@conversations = Conversation.where("account1_id = ? OR account2_id = ?", current_account.id, current_account.id)		
+			if !@conversations.nil?
+				@conversations.each do |conversation|
+					@messages = Message.where(conversation_id: conversation.id).where.not("sender_id = ?", current_account.id)
+					@messages.each do |mess|
+						if mess.sender_id == conversation.account1_id
+							@sender = Account.find_by(id: conversation.account1_id)
+						else
+							@sender = Account.find_by(id:conversation.account2_id)
+						end
+						@recieve_message.push({"message_content": mess, "sender": @sender})
+					end			
+				end
 			end
-		end	
+		end
 	end
 
 
@@ -82,9 +88,15 @@ class MessagesController < ApplicationController
 		@message_detail = Message.find(params[:id])
 		conversation = Conversation.find_by(id: @message_detail.conversation_id)
 		if @message_detail.sender_id == conversation.account1_id
-			@sender = Account.find_by(id: conversation.account2_id)
+			@sender = Account.find_by(id: conversation.account1_id)
+			@recipient = Account.find_by(id: conversation.account2_id)
 		else
-			@sender = Account.find_by(id:conversation.account1_id)
+			@sender = Account.find_by(id:conversation.account2_id)
+			@recipient = Account.find_by(id: conversation.account1_id)
+		end
+
+		if @recipient.id == current_account.id
+			@message_detail.update(unread: false)
 		end
 	end
 
