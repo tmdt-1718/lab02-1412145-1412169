@@ -68,71 +68,82 @@
 
                     <% if @sent_message.length > 0 %>
                         Sent messages
-                        <table class="table table-inbox table-hover">
-                            <tbody>
-    	                        <% @sent_message.each do |message| %>
-        	                            <tr class="">
-        	                                <td class="inbox-small-cells">
-        	                                    <input type="checkbox" class="mail-checkbox">
-        	                                </td>
-        	                               	<td class="view-message dont-show"><a class="" href="/messages/<%= message[:message_content].id %>"><%= message[:recipient].fullname %></a></td>
-        	                                <td class="view-message">
-                                                <button class="btn btn-sm btn-light pull-left"><font color="lightgray">Sent</font></button>
-                                                <a href="/messages/<%= message[:message_content].id %>">
-                                                    <b>
-                                                        <%= message[:message_content].title %> <%= message[:message_content].body %>
-                                                    </b>
-                                                </a>
-                                            </td>
-        	                                <td class="view-message text-right"><a href="/messages/<%= message[:message_content].id %>"><%= message[:message_content].created_at %></a></td>
-        	                            </tr>
-    	                        <% end %>
-                            </tbody>
-                        </table>
+                        <div class="table table-inbox table-hover my-message-list">
+                            <% @sent_message.each do |message| %>
+                                <div class="row my-message-detail">
+                                    <div class="view-message dont-show col-sm-2 col-md-2 col-lg-2 my-message">
+                                        <span class="inbox-small-cells">
+                                            <input type="checkbox" class="mail-checkbox">
+                                        </span> 
+                                        <a class="" href="/messages/<%= message[:message_content].id %>">
+                                            <%= message[:recipient].fullname %>  
+                                        </a>
+                                    </div>
+                                    <div class="view-message col-sm-1 col-md-1 col-lg-1 my-message">
+                                        <button class="btn btn-sm btn-light pull-left">
+                                            <font color="lightgray">Sent</font>
+                                        </button>
+                                    </div>
+                                    <div class="view-message col-sm-6 col-md-6 col-lg-6 my-message">
+                                        <a href="/messages/<%= message[:message_content].id %>">
+                                            <%= message[:message_content].body %>
+                                        </a>
+                                    </div>
+                                    <div class="view-message text-right col-sm-3 col-md-3 col-lg-3 my-message">
+                                        <a href="/messages/<%= message[:message_content].id %>">
+                                            <a href="/messages/<%= message[:message_content].id %>">
+                                                <%= message[:message_content].created_at %>
+                                            </a>
+                                        </a>
+                                    </div>
+                                </div>
+                            <% end %>
+                        </div>
                     <% end %>
 
                     <% if @recieve_message.length > 0 %>
-                    Recieve messages
-                        <table class="table table-inbox table-hover">
-                            <tbody>
-                        	
-	                        	<% @recieve_message.each do |message| %>
-	                                <% if message[:message_content].unread %>
-                                        <tr class="unread">
-                                    <% else %>
-                                        <tr class="">
-                                    <% end %>
-                                    
-    	                                <td class="inbox-small-cells">
-    	                                    <input type="checkbox" class="mail-checkbox">
-    	                                </td>
-    	                               	<td class="view-message dont-show">
+                        Recieve messages
+                        <div class="table table-inbox table-hover my-message-list">
+                            <% @recieve_message.each do |message| %>
+                            <% if message[:message_content].unread %>
+                                <div class="unread-message">
+                            <% else %>
+                                <div class="">
+                            <% end %>
+                                <div class="row my-message-detail">
+                                    <div class="view-message dont-show col-sm-2 col-md-2 col-lg-2 my-message">
+                                        <span class="inbox-small-cells">
+                                            <input type="checkbox" class="mail-checkbox">
+                                        </span> 
+                                        <a class="" href="/messages/<%= message[:message_content].id %>">
+                                            <%= message[:sender].fullname %>  
+                                        </a>
+                                    </div>
+                                    <div class="view-message col-sm-1 col-md-1 col-lg-1 my-message">
+                                        <% if message[:message_content].unread %>   
+                                            <button class="btn btn-sm btn-danger pull-left">New&nbsp;</button>
+                                        <% else %>
+                                            <button class="btn btn-sm btn-light pull-left">
+                                                <font color="lightgray">Seen</font>
+                                            </button>
+                                        <% end %>
+                                    </div>
+                                    <div class="view-message col-sm-6 col-md-6 col-lg-6 my-message">
+                                        <a href="/messages/<%= message[:message_content].id %>">
+                                            <%= message[:message_content].body %>
+                                        </a>
+                                    </div>
+                                    <div class="view-message text-right col-sm-3 col-md-3 col-lg-3 my-message">
+                                        <a href="/messages/<%= message[:message_content].id %>">
                                             <a href="/messages/<%= message[:message_content].id %>">
-                                                <%= message[:sender].fullname %>
+                                                <%= message[:message_content].created_at %>
                                             </a>
-                                        </td>
-    	                                <td class="view-message">
-                                            <% if message[:message_content].unread %>   
-                                                <button class="btn btn-sm btn-danger pull-left">New&nbsp;</button>
-                                            <% else %>
-                                                <button class="btn btn-sm btn-light pull-left"><font color="lightgray">Seen</font></button>
-                                            <% end %>
-                                            <a href="/messages/<%= message[:message_content].id %>">
-                                                <b><%= message[:message_content].title %></b>
-                                                <%= message[:message_content].body %>
-                                            </a>
-                                            
-                                            
-                                        </td>
-    	                                <td class="view-message text-right">
-                                            <a href="/messages/<%= message[:message_content].id %>"><%= message[:message_content].created_at %></a>
-                                        </td>
-    	                            </tr> 
-                                
-	                            <% end %>
-                            
-                            </tbody>
-                        </table>
+                                        </a>
+                                    </div>
+                                </div>
+                            <% end %>
+                        </div>
+                        </div>
                     <% end %>
 
                 </div>
