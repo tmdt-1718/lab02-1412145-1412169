@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
       account = Account.find_by(username: params[:session][:username])
       if account && account.authenticate(params[:session][:password])
         log_in account
-        redirect_to root_path
+        redirect_to messages_path
       else
         # Create an error message.
         render 'new'
@@ -15,6 +15,6 @@ class SessionsController < ApplicationController
     
     def destroy
       log_out
-      redirect_to root_path
+      redirect_to login_path
     end
 end

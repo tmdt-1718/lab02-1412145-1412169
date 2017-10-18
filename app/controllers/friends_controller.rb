@@ -141,7 +141,7 @@ class FriendsController < ApplicationController
         # Confirms a logged-in account.
         def logged_in_account
             unless logged_in?
-            redirect_to login_path
+                redirect_to login_path
             end
         end   
 end

@@ -40,6 +40,6 @@ class AccountsController < ApplicationController
         # Confirms the correct user.
         def correct_account
             @account = Account.find(params[:id])
-            redirect_to(root_path) unless current_account == @account
+            redirect_to(login_path) unless current_account == @account
         end
 end
