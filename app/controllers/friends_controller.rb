@@ -137,6 +137,22 @@ class FriendsController < ApplicationController
         redirect_to friends_path
     end
 
+    def unblockfriend
+        block_friend = BlockFriend.find_by(account_id: current_account.id, blocked_id: params[:id])
+        state_before = block_friend.state_before
+        if state_before != "none"
+            friendship = Friend.find_by(account_id: current_account.id, friend_id: params[:id])
+            if !friendship.nil?
+            else
+                friendship = Friend.find_by(account_id: params[:id], friend_id: current_account.id)
+            end
+            friendship.update(state_friendship: state_before)
+        end
+        block_friend.destroy
+
+        redirect_to friends_path
+    end
+
     private
         # Confirms a logged-in account.
         def logged_in_account

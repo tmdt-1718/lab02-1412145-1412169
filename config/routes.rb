@@ -7,6 +7,8 @@ Rails.application.routes.draw do
 
   get 'friends/block/:id', to: 'friends#blockfriend'
 
+  get 'friends/unblock/:id', to: 'friends#unblockfriend'
+
   get '/about', to: 'about#show'
 
   get '/signup', to: 'accounts#new'
