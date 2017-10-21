@@ -50,7 +50,7 @@ class MessagesController < ApplicationController
 
 		#sent_message
 		if param_view != "recieve"
-			@message = Message.where("sender_id = ?", current_account.id)
+			@message = Message.order(created_at: :desc).where("sender_id = ?", current_account.id)
 			if !@message.nil?
 				@message.each do |message|
 					conversation = Conversation.find_by(id: message.conversation_id)
@@ -62,6 +62,9 @@ class MessagesController < ApplicationController
 					@sent_message.push({"message_content": message, "recipient": @recipient})
 				end
 			end
+			if param_view == "sentlistjson"
+				render json: @sent_message, status: :ok
+			end
 		end
 
 		#recieve_message
@@ -69,7 +72,7 @@ class MessagesController < ApplicationController
 			@conversations = Conversation.where("account1_id = ? OR account2_id = ?", current_account.id, current_account.id)		
 			if !@conversations.nil?
 				@conversations.each do |conversation|
-					@messages = Message.where(conversation_id: conversation.id).where.not("sender_id = ?", current_account.id)
+					@messages = Message.order(created_at: :desc).where(conversation_id: conversation.id).where.not("sender_id = ?", current_account.id)
 					@messages.each do |mess|
 						if mess.sender_id == conversation.account1_id
 							@sender = Account.find_by(id: conversation.account1_id)
@@ -79,6 +82,9 @@ class MessagesController < ApplicationController
 						@recieve_message.push({"message_content": mess, "sender": @sender})
 					end			
 				end
+			end
+			if param_view == "recievedlistjson"
+				render json: @recieve_message, status: :ok
 			end
 		end
 	end

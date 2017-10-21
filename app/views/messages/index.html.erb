@@ -68,7 +68,7 @@
 
                     <% if @sent_message.length > 0 %>
                         Sent messages
-                        <div class="table table-inbox table-hover my-message-list">
+                        <div class="table table-inbox table-hover my-message-list" id="sent-message-list">
                             <% @sent_message.each do |message| %>
                                 <div class="row my-message-detail">
                                     <div class="view-message dont-show col-sm-2 col-md-2 col-lg-2 my-message">
@@ -103,7 +103,7 @@
 
                     <% if @recieve_message.length > 0 %>
                         Recieved messages
-                        <div class="table table-inbox table-hover my-message-list">
+                        <div class="table table-inbox table-hover my-message-list" id="recieved-message-list">
                             <% @recieve_message.each do |message| %>
                             <% if message[:message_content].unread %>
                                 <div class="unread-message">
@@ -158,3 +158,5 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
         crossorigin="anonymous"></script> -->
     <!-- <script src="script.js"></script> -->
+
+    <script type="text/javascript" src="scripts/message_index.js"></script>

@@ -10,7 +10,7 @@
             
             <p>
                 <%= form.label :recipient %><br>
-                <%= select("message", "friend_id", @friendlist.collect{|p| [p.fullname, p.id]}, {include_blank: 'Select friend'}) %>
+                <%= select("message", "friend_id", @friendlist.collect{|p| [p.fullname, p.id]}, {include_blank: false}) %>
             </p>
             
             <p>
