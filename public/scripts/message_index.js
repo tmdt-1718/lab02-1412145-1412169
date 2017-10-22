@@ -18,7 +18,13 @@ if (($('#sent-message-list').length)) {
 
                                 htmlContent += list[i].message_content.id + '">'
 
-                                htmlContent += list[i].message_content.body
+                                var truncatedContent = list[i].message_content.body;
+
+                                if (truncatedContent.length > 50) {
+                                    truncatedContent = truncatedContent.slice(0, 50) + "...";
+                                }
+
+                                htmlContent += truncatedContent;
 
                                 htmlContent += '</a></div><div class="view-message text-right col-sm-3 col-md-3 col-lg-3 my-message"><a class="my-message-link" href="/messages/'
 
@@ -72,7 +78,13 @@ if (($('#recieved-message-list').length)) {
 
                                 htmlContent += list[i].message_content.id + '">'
 
-                                htmlContent += list[i].message_content.body
+                                var truncatedContent = list[i].message_content.body;
+
+                                if (truncatedContent.length > 50) {
+                                    truncatedContent = truncatedContent.slice(0, 50) + "...";
+                                }
+
+                                htmlContent += truncatedContent;
 
                                 htmlContent += '</a></div><div class="view-message text-right col-sm-3 col-md-3 col-lg-3 my-message"><a class="my-message-link" href="/messages/'
 

@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
       account = Account.find_by(username: params[:session][:username])
       if account && account.authenticate(params[:session][:password])
         log_in account
-        redirect_to messages_path
+        redirect_to (messages_path + "?view=recieve")
       else
         # Create an error message.
         render 'new'

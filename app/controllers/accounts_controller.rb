@@ -19,7 +19,7 @@ class AccountsController < ApplicationController
         if @account.save
             @account.update(avatar: "https://openclipart.org/image/2400px/svg_to_png/247319/abstract-user-flat-3.png")
             log_in @account
-            redirect_to @account
+            redirect_to messages_path
         else
             render 'new'
         end
@@ -33,7 +33,7 @@ class AccountsController < ApplicationController
         # Confirms a logged-in account.
         def logged_in_account
             unless logged_in?
-            redirect_to login_path
+                redirect_to login_path
             end
         end
 

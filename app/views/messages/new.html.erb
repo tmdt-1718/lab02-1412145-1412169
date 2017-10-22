@@ -1,21 +1,21 @@
-<div class="container">
+<!-- <div class="container"> -->
   <div class="row">
-    <div class="col-md-3"></div>
-    <div class="col-md-6 ">
-      <div class="page-header">
-        <h1 class="text-center"><small>New Message</small></h1>
+    <!-- <div class="col-md-3"></div> -->
+    <div class="col-md-10 ">
+      <div class="card-header">
+        <h1 class=""><small>New Message</small></h1>
       </div>
       <div class="card-body">
         <%= form_with scope: :message, url: messages_path, local: true do |form| %>
             
             <p>
-                <%= form.label :recipient %><br>
-                <%= select("message", "friend_id", @friendlist.collect{|p| [p.fullname, p.id]}, {include_blank: false}) %>
+                <%= form.label "Select friend" %><br>
+                <%= select("message", "friend_id", @friendlist.collect{|p| [p.fullname, p.id]}, {include_blank: false}, {:class => 'form-control'}) %>
             </p>
             
             <p>
                 <%= form.label :content %><br>
-                <%= form.text_area :content, :class => 'form-control' %>
+                <%= form.text_area :content, :class => 'form-control', :rows => '10' %>
             </p>
             
             <p>
@@ -27,4 +27,4 @@
     </div>
     <div class="col-md-3"></div>
   </div>
-</div>
+<!-- </div> -->
