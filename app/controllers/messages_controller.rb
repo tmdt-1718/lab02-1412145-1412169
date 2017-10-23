@@ -1,4 +1,6 @@
 class MessagesController < ApplicationController
+	before_action :logged_in_account, only: [:new, :create, :index, :show]
+	before_action :correct_account, only: [:show]
 
 	def new
 		@friendlist ||= []
@@ -13,9 +15,7 @@ class MessagesController < ApplicationController
                         @friendlist.push(Account.find_by(id: friendship.account_id))
                     end
                 end
-
             end
-
         end
 	end
 
@@ -42,8 +42,8 @@ class MessagesController < ApplicationController
 		@conversation.update(last_message_id: @message.id)
 
 		UserMailer.notification(friend_id,current_account).deliver_now
-		redirect_to messages_path
-
+		
+		redirect_to (messages_path + "?view=sent")
 	end
 
 	def index
@@ -51,6 +51,12 @@ class MessagesController < ApplicationController
 		@recieve_message ||= []
 
 		param_view = params[:view]
+		current_page = params[:page]
+		if current_page.nil?
+			page_number = 1
+		else
+			page_number = Integer(current_page)
+		end
 
 		#sent_message
 		if param_view != "recieve"
@@ -65,9 +71,6 @@ class MessagesController < ApplicationController
 					end
 					@sent_message.push({"message_content": message, "recipient": @recipient})
 				end
-			end
-			if param_view == "sentlistjson"
-				render json: @sent_message, status: :ok
 			end
 		end
 
@@ -87,9 +90,57 @@ class MessagesController < ApplicationController
 					end			
 				end
 			end
-			if param_view == "recievedlistjson"
-				render json: @recieve_message, status: :ok
+		end
+
+		if param_view == "sent" || param_view == "sentlistjson"
+			message_count = @sent_message.length
+			if message_count > 0
+				if message_count <= ((page_number - 1) * 5)
+					mod_page = message_count % 5
+					if mod_page > 0
+						new_page_number = 1 + message_count / 5
+					else
+						new_page_number = message_count / 5
+					end
+					redirect_to (messages_path + "?view=" + param_view + "&page=" + String(new_page_number))
+				else
+					@sent_message = @sent_message.slice((page_number - 1) * 5, (page_number - 1) * 5 + 5)
+				end
 			end
+			
+		else
+			if param_view == "recieve" || param_view == "recievedlistjson"
+				message_count = @recieve_message.length
+				if message_count > 0
+					if message_count <= ((page_number - 1) * 5)
+						mod_page = message_count % 5
+						if mod_page > 0
+							new_page_number = 1 + message_count / 5
+						else
+							new_page_number = message_count / 5
+						end
+						redirect_to (messages_path + "?view=" + param_view + "&page=" + String(new_page_number))
+					else
+						@recieve_message = @recieve_message.slice((page_number - 1) * 5, (page_number - 1) * 5 + 5)
+					end
+				end
+				
+			else
+				if @recieve_message.length > 0
+					@recieve_message = @recieve_message.slice(0, 5)
+				end
+				if @sent_message.length > 0
+					@sent_message = @sent_message.slice(0, 5)
+				end
+			end
+		end
+
+		if param_view == "sentlistjson"
+			render json: @sent_message, status: :ok
+		end
+
+		if param_view == "recievedlistjson"
+			render json: @recieve_message, status: :ok
 		end
 	end
 
@@ -110,5 +161,20 @@ class MessagesController < ApplicationController
 		end
 	end
 
+	private
+		# Confirms a logged-in account.
+        def logged_in_account
+            unless logged_in?
+            	redirect_to login_path
+            end
+        end
 
+        # Confirms the correct user.
+        def correct_account
+        	message_detail = Message.find(params[:id])
+        	conversation = Conversation.find_by(id: message_detail.conversation_id)
+        	if current_account.id != conversation.account1_id && current_account.id != conversation.account2_id
+        		redirect_to(root_path)
+        	end
+        end
 end
