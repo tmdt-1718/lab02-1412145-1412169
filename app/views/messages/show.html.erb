@@ -17,6 +17,7 @@
 <!-- <link rel="stylesheet" type="text/css" href="stylesheets/email.css" /> -->
 
 <!-- BODY -->
+<!-- <div class="content-fluid"> -->
 <div>
 	<p class="callout">
 		<% if @sender.id == current_account.id %>
@@ -41,6 +42,7 @@
 			Received at <%= @message_detail.created_at %> (<%= time_ago_in_words(@message_detail.created_at)%> ago)
 		</p>
 </div>
+<!-- </div> -->
 
 <!-- <table class="">
 	<tr>

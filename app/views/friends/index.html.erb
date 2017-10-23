@@ -1,18 +1,13 @@
-<!-- Breadcrumbs-->
-<!-- <ol class="breadcrumb">
-  <li class="breadcrumb-item">
-    <a href="<%= root_path %>">Home</a>
-  </li>
-  <li class="breadcrumb-item active">Friends</li>
-</ol> -->
-
 <div class="mb-0 mt-4">
     <div class="row">
         <div class="col-md-4 col-sm-4 col-lg-4">
             <i class="fa fa-newspaper-o"></i> Friends
             <div class="clearfix"></div>
             <%= link_to new_friend_path do %>
-            <button type="button" class="btn btn-primary btn-sm"">Add new friend</button>
+                <button type="button" class="btn btn-primary btn-sm"">
+                    <i class="fa fa-fw fa-plus"></i>
+                    New friend
+                </button>
             <% end %>
         </div>
        

@@ -1,18 +1,7 @@
 class FriendsController < ApplicationController
-    before_action :logged_in_account, only: [:index]
+    before_action :logged_in_account, only: [:index, :new, :create, :acceptrequest, :deleterequest, :blockfriend, :unblockfriend]
 
     def index
-        # @friendlist ||= []
-        # friendships = Friend.where("account_id = ? OR friend_id = ?", current_account.id, current_account.id)
-        # if !friendships.nil?
-        #     friendships.each do |friendship|
-        #         if friendship.sender_id == current_account.id
-        #             @friendlist.push(Account.find_by(id: friendship.recipient_id))
-        #         else
-        #             @friendlist.push(Account.find_by(id: friendship.sender_id))
-        #         end
-        #     end
-        # end
         @friendlist ||= []
         @request_list ||= []
         @wait_for_accept_list ||= []
@@ -48,17 +37,6 @@ class FriendsController < ApplicationController
                             if !block_friendship.nil?
                                 @blocked_list.push(Account.find_by(id: block_friendship.blocked_id))
                             end
-                            # block_friendships = BlockFriend.find_by(account_id: friendship.account_id, blocked_id: friendship.friend_id)
-                            # if !block_friendships.nil?
-                            # else
-                            #     block_friendships = BlockFriend.find_by(account_id: friendship.friend_id, blocked_id: friendship.account_id)
-                            # end
-                            # block_friendships = BlockFriend.where("account_id = ? AND blocked_id = ?", current_account)
-                            # if !block_friendships.nil?
-                            #     block_friendships.each do |block_friendship|
-                            #         @blocked_list.push(Account.find_by(id: block_friendship.blocked_id))
-                            #     end
-                            # end
                         end
                     end
                 end

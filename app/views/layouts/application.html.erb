@@ -122,30 +122,28 @@
           <li class="breadcrumb-item active">My Home</li>
         </ol> -->
         <!-- Page content-->
-        <% if logged_in? %>
-        <% else %>
-        <% end %>
       <div class="row">
         <% if logged_in? %>
           <div class="col-sm-2 col-md-2 col-lg-2 my-button-side-left">
-            <a class="btn btn-block btn-primary" href="<%= root_path %>">
+            <a class="btn btn-block btn-dark" href="<%= root_path %>">
               All messages
             </a>
-            <a class="btn btn-block btn-success" href="<%= messages_path %>?view=recieve">
+            <a class="btn btn-block btn-dark" href="<%= messages_path %>?view=recieve">
               Recieved messages
             </a>
-            <a class="btn btn-block btn-warning" href="<%= messages_path %>?view=sent">
+            <a class="btn btn-block btn-dark" href="<%= messages_path %>?view=sent">
               Sent messages
             </a>
-            <a class="btn btn-block btn-basic" href="<%= new_message_path %>">
+            <a class="btn btn-block btn-dark" href="<%= new_message_path %>">
+              <i class="fa fa-fw fa-plus"></i>
               New message
             </a>
-            <a class="btn btn-block btn-info" href="<%= friends_path %>">
+            <a class="btn btn-block btn-dark" href="<%= friends_path %>">
               Friends
             </a>
             <%= link_to "Log out", logout_path, method: :delete, class:"btn btn-block btn-dark" %>
           </div>
-          <div class="col-sm-10 col-md-10 col-lg-10">
+          <div class="col-sm-10 col-md-10 col-lg-10 my-container">
         <% else %>
           <div class="col-sm-12 col-md-12 col-lg-12">
         <% end %>

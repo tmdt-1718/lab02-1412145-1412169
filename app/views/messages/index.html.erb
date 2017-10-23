@@ -1,4 +1,3 @@
-
     <!-- <div class="container"> -->
         <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald:400,300">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
@@ -6,11 +5,23 @@
         <div class="mail-box">
             <aside class="lg-side">
                 <div class="inbox-head">
-                    <h3>Messages</h3>
+                    <h3>
+                        <% if params[:view] == "recieve" %>
+                            Recieved
+                        <% else %>
+                            <% if params[:view] == "sent" %>
+                                Sent
+                            <% else %>
+                                All
+                            <% end %>
+                        <% end %>
+
+                        Messages
+                    </h3>
                 </div>
                 <div class="inbox-body">
                     <div class="mail-option">
-                        <div class="chk-all">
+                        <!-- <div class="chk-all">
                             <input type="checkbox" class="mail-checkbox mail-group-checkbox">
                             <div class="btn-group">
                                 <a data-toggle="dropdown" href="#" class="btn mini all" aria-expanded="false">
@@ -23,14 +34,15 @@
                                     <li><a href="#"> Unread</a></li>
                                 </ul>
                             </div>
-                        </div>
+                        </div> -->
 
                         <div class="btn-group">
                             <a data-original-title="Refresh" data-placement="top" href="" class="btn mini tooltips">
-                                             <i class=" fa fa-refresh"></i>
-                                         </a>
+                                <i class=" fa fa-refresh"></i>
+                                Refresh
+                            </a>
                         </div>
-                        <div class="btn-group hidden-phone">
+                        <!-- <div class="btn-group hidden-phone">
                             <a data-toggle="dropdown" href="#" class="btn mini blue" aria-expanded="false">
 	                             More
 	                             <i class="fa fa-angle-down "></i>
@@ -53,56 +65,45 @@
                                 <li class="divider"></li>
                                 <li><a href="#"><i class="fa fa-trash-o"></i> Delete</a></li>
                             </ul>
-                        </div>
-
-                        <ul class="unstyled inbox-pagination">
-                            <li><span><%= @sum_sent_message %></span></li>
-                            <li>
-                                <a class="np-btn" href="#"><i class="fa fa-angle-left  pagination-left"></i></a>
-                            </li>
-                            <li>
-                                <a class="np-btn" href="#"><i class="fa fa-angle-right pagination-right"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <% if @sent_message.length > 0 %>
-                        Sent messages
-                        <div class="table table-inbox table-hover my-message-list" id="sent-message-list">
-                            <% @sent_message.each do |message| %>
-                                <div class="row my-message-detail">
-                                    <div class="view-message dont-show col-sm-2 col-md-2 col-lg-2 my-message">
-                                        <span class="inbox-small-cells">
-                                            <input type="checkbox" class="mail-checkbox">
-                                        </span> 
-                                        <a class="my-message-link" href="/messages/<%= message[:message_content].id %>">
-                                            <%= message[:recipient].fullname %>  
-                                        </a>
-                                    </div>
-                                    <div class="view-message col-sm-1 col-md-1 col-lg-1 my-message">
-                                        <button class="btn btn-sm btn-light pull-left">
-                                            <font color="lightgray">Sent</font>
-                                        </button>
-                                    </div>
-                                    <div class="view-message col-sm-6 col-md-6 col-lg-6 my-message">
-                                        <a class="my-message-link" href="/messages/<%= message[:message_content].id %>">
-                                            <%= truncate(message[:message_content].body, length: 50) %>
-                                        </a>
-                                    </div>
-                                    <div class="view-message text-right col-sm-3 col-md-3 col-lg-3 my-message">
-                                        <a class="my-message-link" href="/messages/<%= message[:message_content].id %>">
-                                            <a class="my-message-link" href="/messages/<%= message[:message_content].id %>">
-                                                <%= message[:message_content].created_at %>
-                                            </a>
-                                        </a>
-                                    </div>
-                                </div>
+                        </div> -->
+                        <% if params[:view] == "recieve" || params[:view] == "sent"%>
+                            <% current_page = params[:page] %>
+                            <% if current_page.nil? || current_page == "1" %>
+                                <% next_page_number = "2" %>
+                                <% back_page_number = "1" %>
+                                <% current_page_number = "1" %>
+                            <% else %>
+                                <% next_page_number = String(Integer(current_page) + 1) %>
+                                <% back_page_number = String(Integer(current_page) - 1) %>
+                                <% current_page_number = current_page %>
                             <% end %>
-                        </div>
-                    <% end %>
+                            <% link_page = messages_path + "?view=" + params[:view] + "&page=" %>
+                            <ul class="unstyled inbox-pagination">
+                                <li><span><%= @sum_sent_message %></span></li>
+                                <li>
+                                    <a class="np-btn" href="<%= link_page + back_page_number %>">
+                                        <i class="fa fa-angle-left  pagination-left"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="np-btn" href="<%= link_page + next_page_number %>">
+                                        <i class="fa fa-angle-right pagination-right"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        <% end %>
 
+                    </div>
                     <% if @recieve_message.length > 0 %>
-                        Recieved messages
+                        <% if params[:view] == "recieve" %>
+                            Recieved messages
+                        <% else %>
+                            <a class="my-message-link" href="<%= messages_path %>?view=recieve">
+                                Recieved messages
+                                <i class="fa fa-angle-right pagination-right"></i>
+                            </a>
+                        <% end %>
+                        
                         <div class="table table-inbox table-hover my-message-list" id="recieved-message-list">
                             <% @recieve_message.each do |message| %>
                             <% if message[:message_content].unread %>
@@ -112,9 +113,9 @@
                             <% end %>
                                 <div class="row my-message-detail">
                                     <div class="view-message dont-show col-sm-2 col-md-2 col-lg-2 my-message">
-                                        <span class="inbox-small-cells">
+                                        <!-- <span class="inbox-small-cells">
                                             <input type="checkbox" class="mail-checkbox">
-                                        </span> 
+                                        </span>  -->
                                         <a class="my-message-link" href="/messages/<%= message[:message_content].id %>">
                                             <%= message[:sender].fullname %>  
                                         </a>
@@ -146,6 +147,49 @@
                         </div>
                     <% end %>
 
+                    <% if @sent_message.length > 0 %>
+                        <% if params[:view] == "sent" %>
+                            Sent messages
+                        <% else %>
+                            <a class="my-message-link" href="<%= messages_path %>?view=sent">
+                                Sent messages
+                                <i class="fa fa-angle-right pagination-right"></i>
+                            </a>
+                        <% end %>
+                        
+                        <div class="table table-inbox table-hover my-message-list" id="sent-message-list">
+                            <% @sent_message.each do |message| %>
+                                <div class="row my-message-detail">
+                                    <div class="view-message dont-show col-sm-2 col-md-2 col-lg-2 my-message">
+                                        <!-- <span class="inbox-small-cells">
+                                            <input type="checkbox" class="mail-checkbox">
+                                        </span>  -->
+                                        <a class="my-message-link" href="/messages/<%= message[:message_content].id %>">
+                                            <%= message[:recipient].fullname %>  
+                                        </a>
+                                    </div>
+                                    <div class="view-message col-sm-1 col-md-1 col-lg-1 my-message">
+                                        <button class="btn btn-sm btn-light pull-left">
+                                            <font color="lightgray">Sent</font>
+                                        </button>
+                                    </div>
+                                    <div class="view-message col-sm-6 col-md-6 col-lg-6 my-message">
+                                        <a class="my-message-link" href="/messages/<%= message[:message_content].id %>">
+                                            <%= truncate(message[:message_content].body, length: 50) %>
+                                        </a>
+                                    </div>
+                                    <div class="view-message text-right col-sm-3 col-md-3 col-lg-3 my-message">
+                                        <a class="my-message-link" href="/messages/<%= message[:message_content].id %>">
+                                            <a class="my-message-link" href="/messages/<%= message[:message_content].id %>">
+                                                <%= message[:message_content].created_at %>
+                                            </a>
+                                        </a>
+                                    </div>
+                                </div>
+                            <% end %>
+                        </div>
+                    <% end %>
+
                 </div>
             </aside>
         </div>
@@ -165,14 +209,14 @@
     if (($('#sent-message-list').length)) {
             setInterval(function() {
                 $.ajax({
-                    url: "/messages?view=sentlistjson",
+                    url: "/messages?view=sentlistjson&page=<%= current_page_number %>",
                     dataType: 'json',
                     success: function(list){
                         // alert(result.length);
                         if (list.length > 0) {
                             var htmlContent = "";
                             for (var i = 0; i < list.length; i++) {
-                                htmlContent += '<div class="row my-message-detail"><div class="view-message dont-show col-sm-2 col-md-2 col-lg-2 my-message"><span class="inbox-small-cells"><input type="checkbox" class="mail-checkbox"></span> <a class="my-message-link" href="/messages/'
+                                htmlContent += '<div class="row my-message-detail"><div class="view-message dont-show col-sm-2 col-md-2 col-lg-2 my-message"><a class="my-message-link" href="/messages/'
 
                                 htmlContent += list[i].message_content.id + '">'
 
@@ -212,7 +256,7 @@
 if (($('#recieved-message-list').length)) {
             setInterval(function() {
                 $.ajax({
-                    url: "/messages?view=recievedlistjson",
+                    url: "/messages?view=recievedlistjson&page=<%= current_page_number %>",
                     dataType: 'json',
                     success: function(list){
                         // alert(result.length);
@@ -226,7 +270,7 @@ if (($('#recieved-message-list').length)) {
                                     htmlContent += '<div class="">'
                                 }
 
-                                htmlContent += '<div class="row my-message-detail"><div class="view-message dont-show col-sm-2 col-md-2 col-lg-2 my-message"><span class="inbox-small-cells"><input type="checkbox" class="mail-checkbox"></span> <a class="my-message-link" href="/messages/'
+                                htmlContent += '<div class="row my-message-detail"><div class="view-message dont-show col-sm-2 col-md-2 col-lg-2 my-message"> <a class="my-message-link" href="/messages/'
 
                                 htmlContent += list[i].message_content.id + '">'
 
