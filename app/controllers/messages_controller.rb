@@ -13,7 +13,9 @@ class MessagesController < ApplicationController
                         @friendlist.push(Account.find_by(id: friendship.account_id))
                     end
                 end
+
             end
+
         end
 	end
 
@@ -39,7 +41,9 @@ class MessagesController < ApplicationController
 
 		@conversation.update(last_message_id: @message.id)
 
+		UserMailer.notification(friend_id,current_account).deliver_later
 		redirect_to messages_path
+
 	end
 
 	def index
