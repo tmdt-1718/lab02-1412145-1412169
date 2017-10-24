@@ -124,26 +124,30 @@
         <!-- Page content-->
       <div class="row">
         <% if logged_in? %>
-          <div class="col-sm-2 col-md-2 col-lg-2 my-button-side-left">
-            <a class="btn btn-block btn-dark" href="<%= root_path %>">
-              All messages
+          <div class="col-sm-12 col-md-12 col-lg-2 my-button-side-left">
+            <a class="btn btn-block btn-dark text-left" href="<%= root_path %>">
+              <i class="fa fa-fw fa-asterisk"></i>
+              All
             </a>
-            <a class="btn btn-block btn-dark" href="<%= messages_path %>?view=recieve">
-              Recieved messages
+            <a class="btn btn-block btn-dark text-left" href="<%= messages_path %>?view=recieve">
+              <i class="fa fa-fw fa fa-level-down"></i>
+              Recieved
             </a>
-            <a class="btn btn-block btn-dark" href="<%= messages_path %>?view=sent">
-              Sent messages
+            <a class="btn btn-block btn-dark text-left" href="<%= messages_path %>?view=sent">
+              <i class="fa fa-fw fa fa-level-up"></i>
+              Sent
             </a>
-            <a class="btn btn-block btn-dark" href="<%= new_message_path %>">
+            <a class="btn btn-block btn-dark text-left" href="<%= new_message_path %>">
               <i class="fa fa-fw fa-plus"></i>
-              New message
+              New
             </a>
-            <a class="btn btn-block btn-dark" href="<%= friends_path %>">
+            <a class="btn btn-block btn-dark text-left" href="<%= friends_path %>">
+              <i class="fa fa-fw fa-group"></i>
               Friends
             </a>
-            <%= link_to "Log out", logout_path, method: :delete, class:"btn btn-block btn-dark" %>
+            <%= link_to " Log out", logout_path, method: :delete, class:"btn btn-block btn-dark text-left fa fa-sign-out" %>
           </div>
-          <div class="col-sm-10 col-md-10 col-lg-10 my-container">
+          <div class="col-sm-12 col-md-12 col-lg-10 my-container">
         <% else %>
           <div class="col-sm-12 col-md-12 col-lg-12">
         <% end %>

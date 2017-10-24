@@ -63,7 +63,7 @@ gem "font-awesome-rails"
 
 gem 'bcrypt', '3.1.11'
 
-gem 'devise'
-gem 'faye'
-gem 'thin', require: false
-gem 'sync'
+# gem 'devise'
+# gem 'faye'
+# gem 'thin', require: false
+# gem 'sync'
