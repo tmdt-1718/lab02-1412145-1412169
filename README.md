@@ -1,4 +1,4 @@
-# BT-TMDT-2 - *Name of your app*
+# BT-TMDT-2 - *H20_MESSAGE*
 
 **Name of your app** là một bài tập môn TMDT. Ứng dụng cho phép người dùng gửi tin nhắn (email) cho người dùng khác.
 
