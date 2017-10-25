@@ -6,7 +6,7 @@ Thành viên:
 * [X] **1412145** Nguyễn Đức Hải (1412145)
 * [ ] **1412169** Hồ Thảo Hiền (1412169)
 
-URL: **https://h2o-message.herokuapp.com/login**
+URL: **https://h2o-message.herokuapp.com/**
 
 ## Yêu cầu
 
@@ -34,14 +34,14 @@ Yêu cầu **không bắt buộc**:
 * [ ] Người dùng có thể gửi hình ảnh đính kèm theo thông điệp. 
 * [ ] Người dùng có thể gửi tin nhắn đến nhiều người dùng cùng lúc. 
 * [ ] Người dùng có thể đăng nhập với Facebook. 
-* [ ] Người dùng có thể xóa người dùng khác ra khỏi danh sách bạn. 
+* [X] Người dùng có thể xóa người dùng khác ra khỏi danh sách bạn. (**1412145**)
 * [ ] Khi người dùng kéo xuống cuối trang, các tin nhắn tiếp theo sẽ tự động hiển thị hoặc có nút nhấn "Xem thêm tin nhắn" để nạp thêm danh sách tin nhắn. (**MSSV**)
 * [ ] Người dùng sẽ nhận được email khi người nhận đã đọc tin nhắn. 
 * [ ] Người dùng có thể gửi tin nhắn cho người dùng ngoài hệ thống. Khi đó, người nhận sẽ nhận được 1 email chứa link đăng ký tài khoản. Sau khi đăng ký tài khoản, họ có thể xem tin nhắn đã nhận. 
 
 Liệt kê các **yêu cầu nâng cao** đã thực hiện:
-* [X] Phân trang
-* [X] Giới hạn số lượng tin nhắn sẽ được xem, khoảng thời gian tin nhắn được gửi đến.
+* [X] Phân trang, mỗi trang chỉ load được 5 tin nhắn và có nút nhắn để qua trang tiếp theo. (**1412145**)
+* [X] Giới hạn số lượng tin nhắn sẽ được xem, khoảng thời gian tin nhắn được gửi đến. (**141214**)
 
 ## Demo
 
