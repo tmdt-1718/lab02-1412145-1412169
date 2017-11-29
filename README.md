@@ -4,7 +4,7 @@
 
 Thành viên:
 * [X] **1412145** Nguyễn Đức Hải (1412145)
-* [ ] **1412169** Hồ Thảo Hiền (1412169)
+* [X] **1412169** Hồ Thảo Hiền (1412169)
 
 URL: **https://h2o-message.herokuapp.com/**
 
